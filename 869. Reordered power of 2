@@ -1,0 +1,29 @@
+daily challenge question(869.REORDERED POWER OF 2) AUG 10
+
+in this soln i first used a helper fn to convert the given int to string and sort it and then compare it with every power of 2 by converting them to string with help of helper function if it matches then we return 
+true or else we return false
+
+
+
+class Solution {
+public:
+
+    string inttostring(int n){   // helper function used to convert int ot string and also sort the string
+        string s = to_string(n);   
+        sort(s.begin(),s.end());
+        return s;
+    }
+
+    bool reorderedPowerOf2(int n) {
+        string s = inttostring(n);
+
+        for(int power=0;power<=29;power++){  
+// this for loop converts every power of 2 from 0 to 29 from int to string and then compare it with s which is our sorted string from helper function if it matches then 
+return true or else return false
+            if(s==inttostring(1<<power)){     //1<<power is the way to find the power of 2 ,, we can also use fn power(2,power)
+                return true;
+            }
+        }
+        return false;
+    }
+};
