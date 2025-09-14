@@ -1,0 +1,26 @@
+pivot index is nothing but a index which have a leftsum = rightsum.. we will first calculate toatl sum by a for loop and left sum while travesrsing and right sum by subtracting leftsum and the current element from 
+total sum....
+
+
+
+
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int totalsum=0;
+        for(int i=0;i<nums.size();i++){
+            totalsum=totalsum+nums[i];
+        }
+        int leftsum=0;
+        for(int i=0;i<nums.size();i++){
+            int rightsum = totalsum-leftsum-nums[i];
+            if(leftsum==rightsum){
+                return i;
+            }
+            else {
+                leftsum=leftsum+nums[i];
+            }
+        }
+        return -1;
+    }
+};
