@@ -1,0 +1,17 @@
+in this approach ive first calculated the totalsum  of all the numbers from range 0,n and thrn calculate the sum of all the elements in the nums array 
+then to find the missing number we just need to subtact the sum of nums array from the totalsum thats it...
+
+
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        int sum=(n*(n+1))/2;
+        int nums_sum=0;
+        for(int i=0;i<n;i++){
+            nums_sum=nums_sum+nums[i];
+        }
+        return sum-nums_sum;
+    }
+};
