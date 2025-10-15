@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maximum69Number (int num) {
+        string s = to_string(num);
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='6'){
+                s[i]='9';
+                break;
+            }
+        }
+        return stoi(s);
+    }
+};
+
+//the logic is simple first covert the int number toa string then check for the first occuring 6 then convert that 6 to 9;
+and then while returning convert back the string to int
