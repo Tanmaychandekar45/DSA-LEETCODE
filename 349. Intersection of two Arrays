@@ -1,0 +1,57 @@
+Intuition
+The most straightforward way to find common elements between two lists is to compare every element of the first list against every element of the second list.
+
+We start with an empty result list.
+
+We iterate through nums1. For each number, we scan through all of nums2.
+
+If a match is found, we add the number to our result list.
+
+This initial process will result in a list containing all common elements, but with potentially many duplicates (e.g., if nums1={2, 2} and nums2={2, 2}, the result will be {2, 2, 2, 2}).
+
+To satisfy the requirement that the intersection must contain only unique elements, we use a standard sequence of operations: Sort the result, then use std::unique to move all unique elements to the front, and finally erase the remaining duplicates.
+
+Approach
+Brute-Force Comparison (Nested Loops)
+The first phase uses nested loops to find all common elements:
+The outer loop iterates through nums1 (from index i=0 to N−1).
+The inner loop iterates through nums2 (from index j=0 to M−1).
+If nums1[i] == nums2[j], the element is added to the result vector.
+
+Post-Processing to Handle UniquenessThe second phase cleans up the result vector to ensure only unique elements remain:
+
+sort(result.begin(), result.end()): This places identical elements adjacently, which is a prerequisite for the std::unique function.
+
+unique(result.begin(), result.end()): This function shifts unique elements to the front of the range and returns an iterator (last_unique) pointing to the element immediately following the sequence of unique elements. The section of the vector from last_unique to the end contains the now-redundant duplicate values.
+
+result.erase(last_unique, result.end()): This removes the duplicate elements from the end of the vector.
+
+Complexity
+Time complexity: O(N*M + R /log R)
+
+Where N is length of nums1
+
+and M is length of nums2
+
+and R is the size of result vector
+
+Space complexity: O(R)
+
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> result;
+        for(int i=0;i<nums1.size();i++){
+            for(int j=0;j<nums2.size();j++){
+                if(nums1[i]==nums2[j]){
+                    result.push_back(nums1[i]);
+                }
+            }
+        }
+        sort(result.begin(),result.end());
+        auto last_unique=unique(result.begin(),result.end());
+        result.erase(last_unique,result.end());
+        return result;
+    }
+};
